@@ -1,0 +1,9 @@
+<launch>
+
+
+     <node name="canbus_driver2" pkg="can_bus" type="dzt_canbus_service" output="screen">
+    <param name="gDevIdx1" value="1" />
+    </node>
+
+
+</launch>

@@ -1,0 +1,19 @@
+<launch>
+
+<!-- lanelet2_map_visualization -->
+	<node pkg="map_file" type="lanelet2_map_visualization" name="lanelet2_map_visualization" output="screen" />
+
+<!-- lidar_detector_visualization -->
+	<node pkg="detected_objects_visualizer" type="visualize_detected_objects" name="lidar_detector_visualization"
+          output="screen" ns="/detection/lidar_detector/">
+    </node>
+    
+<!-- object_tracker_visualization -->    
+	<node pkg="detected_objects_visualizer" type="visualize_detected_objects" name="object_tracker_visualization"
+          output="screen" ns="/detection/object_tracker/"> 
+    </node>
+
+<!-- rviz -->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find benchmark)/rviz/benchmark_tracking.rviz" />
+
+</launch>

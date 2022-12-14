@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="gps_driver" type="gps_driver" name="gps_driver" output="screen">
+    </node>
+    <node pkg="ecef2utm" name="GNSS_pub" type="GNSS_pub_beidou.py" output="screen"/>
+    <node name="chasu_service" pkg="chasu" type="mn_service_update2" output="screen">
+      <param name="enable_debug" value="true" />
+    </node>
+    <node name="chasu_driver" pkg="chasu" type="mn_driver_update2" output="screen">
+    <!-- <param name="wheelbase" value="0.7945" /> -->
+    <param name="max_speed" value="2.0" />
+    <param name="publish_tf" value="false" />
+    <param name="rate" value="10" />
+    </node>
+</launch>

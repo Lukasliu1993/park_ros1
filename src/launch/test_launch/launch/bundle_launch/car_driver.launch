@@ -1,0 +1,27 @@
+<launch>
+
+<!-- car_driver -->
+<arg name="robot_pub_tf" default="false" />
+<arg name="car_driver_port" default="/dev/AP1" />
+	<!-- AP1 驱动 -->
+	<node name="autolabor_driver" pkg="autolabor_pro1_driver" type="autolabor_pro1_driver" output="screen">
+		<remap from="/wheel_odom" to="/odom"/>
+		<param name="port_name" value="$(arg car_driver_port)" />
+		<param name="odom_frame" value="odom" />
+		<param name="base_frame" value="base_link" />
+
+		<param name="baud_rate" value="115200" />
+		<param name="control_rate" value="10" />
+		<param name="sensor_rate" value="5" />
+
+		<param name="reduction_ratio" value="1.0" />
+		<param name="encoder_resolution" value="1600.0" />
+
+		<param name="wheel_diameter" value="0.25" />
+		<param name="model_param_cw" value="0.80" />
+		<param name="model_param_acw" value="0.80" />
+		<param name="pid_rate" value="50.0" />
+		<param name="maximum_encoding" value="32.0" />
+		<param name="publish_tf" value="$(arg robot_pub_tf)" />
+	</node>
+</launch>

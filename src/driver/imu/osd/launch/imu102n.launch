@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="osd" type="osd" name="osd" output="screen">
+      <param name="port" value="/dev/ttyUSB0" type="string" />
+      <param name="bund" value="460800" type="int" />
+    </node>
+</launch>

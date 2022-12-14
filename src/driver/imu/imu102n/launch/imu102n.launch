@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="imu102n" type="imu102n_new" name="imu">
+      <param name="port" value="/dev/ttyUSB0" type="string" />
+      <param name="bund" value="230400" type="int" />
+    </node>
+</launch>

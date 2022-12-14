@@ -1,0 +1,16 @@
+<launch>
+	<arg name="car_driver_port" default="/dev/AP1"/>
+	<arg name="imu_port" default="/dev/IMU"/>
+  <param name="robot_description" textfile="$(find test_launch)/urdf/rgbd.xacro" />
+<!-- camera -->
+	  <include file="$(find astra_camera)/launch/astra.launch"/>
+	<node name="pcl_test_node" pkg="pcl_test" type="pcl_test_node">
+		<param name="input_topic" value="/camera/depth/points"/>
+		<param name="output_topic" value="/camera/depth/filtered_points"/>
+		<param name="resolution" value="0.2"/>
+    </node>
+<!-- visualization -->
+	  <!-- <include file="$(find test_launch)/launch/bundle_launch/visualization.launch"/>  -->
+	<node name="robot_state_pblisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find test_launch)/rviz/camera.rviz" />
+</launch>

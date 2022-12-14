@@ -1,0 +1,14 @@
+<launch>
+
+    <node name="canbus_driver1" pkg="can_bus" type="dzt_canbus_service" output="screen">
+    <param name="gDevIdx1" value="0" />
+    </node>
+     <!-- <node name="canbus_driver2" pkg="can_bus" type="dzt_canbus_service" output="screen">
+    <param name="gDevIdx1" value="1" />
+    </node> -->
+    <node name="dzt_driver" pkg="can_bus" type="dzt_driver" output="screen">
+    <param name="check_model" value="false" />
+    <param name="vel_model" value="true" />
+    </node>
+
+</launch>

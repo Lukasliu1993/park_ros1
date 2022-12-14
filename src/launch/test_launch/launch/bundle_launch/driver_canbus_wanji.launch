@@ -1,0 +1,32 @@
+<launch>
+ <arg name="imu_port" default="/dev/ttyUSB0" />
+ <!-- imu -->
+ 	<node pkg="imu102n" type="imu102n" name="imu">
+		<param name="port" value="$(arg imu_port)" type="string" />
+		<param name="bund" value="230400" type="int" />
+	</node>
+<!-- car -->
+    <node name="mn_service" pkg="can_bus" type="mn_service_update2" output="screen">
+      <param name="enable_debug" value="true" />
+    </node>
+    <node name="mn_driver" pkg="can_bus" type="mn_driver_update2" output="screen">
+    <!-- <param name="wheelbase" value="0.7945" /> -->
+    <param name="max_speed" value="2.0" />
+    <param name="publish_tf" value="false" />
+    <param name="rate" value="10" />
+    </node>
+	<!-- <node pkg="rslidar_sdk" name="rslidar_sdk_node" type="rslidar_sdk_node" output="screen">
+	</node> -->
+  	<include file="$(find wanji_pointcloud)/launch/16e_points.launch"/>
+<!-- 键盘遥控 -->    
+    <node name="control" pkg="dt_keyboard_control" type="keyboard_control_node" output="screen">
+    <param name="angular_max" value="0.8" />
+    <param name="angular_min" value="0.2" />
+    <param name="linear_max" value="0.8" />
+    <param name="linear_min" value="0.2" />
+    <param name="linear_step" value="0.1" />
+    <param name="angular_step" value="0.1" />
+    </node>
+<param name="robot_description" textfile="$(find test_launch)/urdf/igk.xacro" />
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+</launch>

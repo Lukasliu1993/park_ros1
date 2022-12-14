@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+	<!-- Revolute-Revolute Manipulator -->
+	<robot name="autolabor_pro1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+
+	<!-- Base Link -->
+	<link name="base_link">
+		<collision>
+			<origin xyz="0 0 0.18288" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.7248 0.4302 0.195"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://autolabor_description/meshes/pro1_body_color.dae"/>
+			</geometry>
+		</visual>
+
+		<!-- <inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="39"/>
+			<inertia ixx="0.7245" ixy="0.0" ixz="0.0" iyy="1.80" iyz="0.0" izz="2.2857"/>
+		</inertial> -->
+	</link>
+
+	<link name="left_front_wheel">
+		<collision>
+			<origin xyz="0 0 0" rpy="1.5708 0 0"/>
+			<geometry>
+				<cylinder length="0.0822" radius="0.127"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://autolabor_description/meshes/pro1_wheel_color.dae"/>
+			</geometry>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="1.5"/>
+			<inertia ixx="0.013" ixy="0.0" ixz="0.0" iyy="0.0074" iyz="0.0" izz="0.0074"/>
+		</inertial>
+	</link>
+
+	<link name="left_back_wheel">
+		<collision>
+			<origin xyz="0 0 0" rpy="1.5708 0 0"/>
+			<geometry>
+				<cylinder length="0.0822" radius="0.127"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<mesh filename="package://autolabor_description/meshes/pro1_wheel_color.dae"/>
+			</geometry>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="1.5"/>
+			<inertia ixx="0.013" ixy="0.0" ixz="0.0" iyy="0.0074" iyz="0.0" izz="0.0074"/>
+		</inertial>
+	</link>
+
+	<link name="right_front_wheel">
+		<collision>
+			<origin xyz="0 0 0" rpy="1.5708 0 0"/>
+			<geometry>
+				<cylinder length="0.0822" radius="0.127"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 3.1415926535897931"/>
+			<geometry>
+				<mesh filename="package://autolabor_description/meshes/pro1_wheel_color.dae"/>
+			</geometry>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 3.1415926535897931"/>
+			<mass value="1.5"/>
+			<inertia ixx="0.013" ixy="0.0" ixz="0.0" iyy="0.0074" iyz="0.0" izz="0.0074"/>
+		</inertial>
+	</link>
+
+	<link name="right_back_wheel">
+		<collision>
+			<origin xyz="0 0 0" rpy="1.5708 0 0"/>
+			<geometry>
+				<cylinder length="0.0822" radius="0.127"/>
+			</geometry>
+		</collision>
+
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 3.1415926535897931"/>
+			<geometry>
+				<mesh filename="package://autolabor_description/meshes/pro1_wheel_color.dae"/>
+			</geometry>
+		</visual>
+
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 0 3.1415926535897931"/>
+			<mass value="1.5"/>
+			<inertia ixx="0.013" ixy="0.0" ixz="0.0" iyy="0.0074" iyz="0.0" izz="0.0074"/>
+		</inertial>
+	</link>
+
+
+	<joint name="joint_left_front" type="continuous">
+		<parent link="base_link"/>
+		<child link="left_front_wheel"/>
+		<origin xyz="0.19649 0.2643 0.11913" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<dynamics damping="0.7"/>
+	</joint>
+
+	<joint name="joint_left_back" type="continuous">
+		<parent link="base_link"/>
+		<child link="left_back_wheel"/>
+		<origin xyz="-0.18988 0.2643 0.11913" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<dynamics damping="0.7"/>
+	</joint>
+
+	<joint name="joint_right_front" type="continuous">
+		<parent link="base_link"/>
+		<child link="right_front_wheel"/>
+		<origin xyz="0.19649 -0.2643 0.11913" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<dynamics damping="0.7"/>
+	</joint>
+
+	<joint name="joint_right_back" type="continuous">
+		<parent link="base_link"/>
+		<child link="right_back_wheel"/>
+		<origin xyz="-0.18988 -0.2643 0.11913" rpy="0 0 0"/>
+		<axis xyz="0 1 0"/>
+		<dynamics damping="0.7"/>
+	</joint>
+
+    <link name="imu_link">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="imu_link_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="imu_link"/>
+		<origin xyz="0.23 0.0 0.0"/>
+		<!-- <origin xyz="0 0 0"/> -->
+	</joint>
+
+	<link name="GNSS1">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="GNSS1_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="GNSS1"/>
+		<origin xyz="0.305 0.28 0.140"/>
+	</joint>
+
+    <link name="camera_link">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="camera_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="camera_link"/>
+		<origin xyz="0.30 0 0.30" rpy="0 0.0 0"/>
+	</joint>
+    <link name="rslidar">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+    <link name="wanji">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="rslidar_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="rslidar"/>
+		<origin xyz="0.13 0.00 0.62"/>
+	</joint>
+	<joint name="wanji_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="wanji"/>
+		<origin xyz="0.13 0.00 0.62" rpy="0 0 -1.570796"/>
+	</joint>
+    <link name="camera_rgb_optical_frame">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="camera_rgb_optical_frame_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="camera_rgb_optical_frame"/>
+		<!-- <origin xyz="0.30 0 0.30" rpy="-1.570798 0 -1.570798"/> -->
+		<!-- <origin xyz="0.0 0 0.0" rpy="-0.00556 -1.3710489 0.0"/> -->
+		<origin xyz="0.0 0 0.0" rpy="-0.00556 1.7705 0.0"/>
+	</joint>
+	    <link name="velodyne">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="velodyne_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="velodyne"/>
+		<origin xyz="-0.09 0.05 0.46"/>
+	</joint>
+	    <link name="blue">
+        <visual>
+            <origin xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="0.05" radius="0.03"/>
+            </geometry>
+            <material name="gray"/>
+        </visual>
+    </link>
+	<joint name="blue_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="blue"/>
+		<origin xyz="-0.09 0.05 0.50"/>
+	</joint>
+</robot>

@@ -1,0 +1,13 @@
+<launch>
+  <param name="robot_description" textfile="$(find test_launch)/urdf/rgbd.xacro" />
+<!-- camera -->
+<!-- rs_lidar -->
+	<node pkg="rslidar_sdk" name="rslidar_sdk_node" type="rslidar_sdk_node" output="screen">
+	</node>
+	 <!-- <include file="$(find test_launch)/launch/bundle_launch/car_driver_tf.launch"/>
+	<include file="$(find test_launch)/launch/bundle_launch/tools.launch"/> -->
+<!-- visualization -->
+	  <!-- <include file="$(find test_launch)/launch/bundle_launch/visualization.launch"/>  -->
+	<node name="robot_state_pblisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find test_launch)/rviz/camera.rviz" />
+</launch>

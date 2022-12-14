@@ -1,0 +1,38 @@
+<launch>
+ <!-- sensor_driver -->
+ <arg name="imu_port" default="/dev/IMU" />
+ <!-- imu -->
+ 	<node pkg="imu102n" type="imu102n" name="imu">
+		<param name="port" value="$(arg imu_port)" type="string" />
+		<param name="bund" value="230400" type="int" />
+	</node>
+
+  <node name="lidar01" pkg="bluesea2" type="bluesea2_node" output="screen" >
+    <param name="type" value="uart" />
+    <param name="platform" value="LDS-50C-2" />
+    <param name="port" value="/dev/ttyUSB1" />
+    <param name="baud_rate" value="768000" />
+    <param name="max_dist" value="25.0"/>
+    <rosparam param="rate_list">[768000, 1000000 ]</rosparam>
+    <param name="raw_bytes" value="3"/>
+    <param name="frame_id" value="blue" />
+    <param name="output_360" value="true" />
+    <param name="output_scan" value="true" />
+    <param name="output_cloud" value="true"/>
+    <param name="with_angle_filter" value="false"/>
+    <param name="min_angle" value="-2.2"/>
+    <param name="max_angle" value="2.2"/>
+    <param name="hard_resample" value="true"/>
+    <param name="soft_resample" value="false"/>
+    <param name="resample_res" value="0.25"/>
+    <param name="unit_is_mm" value="true"/>
+    <param name="with_confidence" value="true"/>
+    <param name="with_checksum" value="true"/>
+	<remap from="/scan" to="/scan_blue" />
+  </node>
+	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="lidar_filter_front">
+		<remap from="/scan" to="/scan_blue" />
+		<remap from="/scan_filtered" to="/scan_blue_front" />
+		<rosparam command="load" file="$(find test_launch)/params/scan/front_lidar_config.yaml" />
+	</node>
+	</launch>

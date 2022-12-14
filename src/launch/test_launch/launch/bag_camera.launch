@@ -1,0 +1,19 @@
+<launch>
+	<arg name="car_driver_port" default="/dev/AP1"/>
+	<arg name="imu_port" default="/dev/IMU"/>
+<!-- car_driver -->
+	<include file="$(find test_launch)/launch/bundle_launch/car_driver.launch">
+		<arg name="car_driver_port" value="$(arg car_driver_port)"/>
+	</include>
+
+<!-- sensor_driver -->
+	<include file="$(find test_launch)/launch/bundle_launch/sensor_driver_blue.launch">
+		<arg name="imu_port" value="$(arg imu_port)"/>
+	</include>
+
+
+<!-- tools -->
+	  <include file="$(find test_launch)/launch/bundle_launch/tools.launch"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find test_launch)/rviz/mapping.rviz" />
+</launch>

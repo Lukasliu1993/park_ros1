@@ -1,0 +1,28 @@
+<launch>
+
+<!--<param name="/use_sim_time" value="true" />-->
+<arg name="gui" default="false" />
+<param name="use_gui" value="$(arg gui)" />
+
+<!-- 键盘遥控 -->    
+	<node name="control" pkg="dt_keyboard_control" type="keyboard_control_node" output="screen">
+		<param name="linear_max_" value="2.0" />
+		<param name="linear_min_" value="0.2" />
+		<param name="linear_step" value="0.2" />
+		<param name="angular_max" value="2.0" />
+		<param name="angular_min_" value="0.2" />
+		<param name="angular_step" value="0.2" />
+		<param name="brush_switch" value="false" />
+		<param name="rate" value="10.0" />
+	</node>
+	
+<!-- 位置初始化 -->  	
+<!-- <node pkg="initpose" name="initial" type="up_init.py"/>  -->
+	
+<!-- static_tf -->	
+<param name="robot_description" textfile="$(find test_launch)/urdf/rgbd.xacro" />
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	
+	
+	
+</launch>

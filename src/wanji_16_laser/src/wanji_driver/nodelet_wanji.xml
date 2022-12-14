@@ -1,0 +1,9 @@
+<library path="lib/libwanji_driver_nodelet">
+  <class name="wanji_driver/DriverNodelet"
+         type="wanji_driver::DriverNodelet"
+         base_class_type="nodelet::Nodelet">
+    <description>
+      Publish one wanjilidar raw data packet each time.
+    </description>
+  </class>
+</library>

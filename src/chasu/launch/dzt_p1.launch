@@ -1,0 +1,18 @@
+<launch>
+
+    <node name="dzt_p1_service" pkg="can_bus" type="dzt_p1_service" output="screen">
+    </node>
+    <node name="dzt_p1_driver" pkg="can_bus" type="dzt_p1_driver" output="screen">
+    <param name="wheelbase" value="0.7945" />
+    <param name="max_speed" value="2.0" />
+    <!-- <param name="brake_model" value="true" /> -->
+    </node>
+    <node name="control" pkg="dt_keyboard_control" type="keyboard_control_node" output="screen">
+    <param name="angular_max" value="2.0" />
+    <param name="angular_min_" value="0.2" />
+    <param name="linear_max_" value="2.0" />
+    <param name="linear_min_" value="0.2" />
+    <param name="linear_step" value="0.2" />
+    <param name="angular_step" value="0.2" />
+    </node>
+</launch>

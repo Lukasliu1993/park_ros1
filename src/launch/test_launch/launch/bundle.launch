@@ -1,0 +1,32 @@
+<launch>
+	<arg name="car_driver_port" default="/dev/AP1"/>
+	<arg name="imu_port" default="/dev/IMU"/>
+<!-- car_driver -->
+	<include file="$(find test_launch)/launch/bundle_launch/car_driver.launch">
+		<arg name="car_driver_port" value="$(arg car_driver_port)"/>
+	</include>
+
+<!-- sensor_driver -->
+	<include file="$(find test_launch)/launch/bundle_launch/sensor_driver.launch">
+		<arg name="imu_port" value="$(arg imu_port)"/>
+	</include>
+
+<!-- localization -->
+	<include file="$(find test_launch)/launch/bundle_launch/localization.launch"/>
+
+<!-- planning -->
+	<<include file="$(find test_launch)/launch/bundle_launch/planning.launch"/>
+
+<!-- lanelet2_map -->
+	<!-- <include file="$(find test_launch)/launch/bundle_launch/lanelet2_map.launch"/> -->
+
+<!-- tools -->
+	<include file="$(find test_launch)/launch/bundle_launch/tools.launch"/>
+
+<!-- visualization -->
+	<!-- <include file="$(find test_launch)/launch/bundle_launch/visualization.launch"/>  -->
+
+</launch>
+
+
+

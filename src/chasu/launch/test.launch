@@ -1,0 +1,15 @@
+<launch>
+
+    <node name="test_service" pkg="can_bus" type="test_service" output="screen">
+    </node>
+     <!-- <node name="canbus_driver2" pkg="can_bus" type="dzt_canbus_service" output="screen">
+    <param name="gDevIdx1" value="1" />
+    </node> -->
+    <node name="test_driver" pkg="can_bus" type="test_driver" output="screen">
+    <param name="pushvalue" value="10" />
+    <param name="direc" value="0" />
+    <param name="run_time" value="5" />
+    <param name="rate" value="20" />
+    </node>
+
+</launch>

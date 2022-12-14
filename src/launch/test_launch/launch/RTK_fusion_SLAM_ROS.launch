@@ -1,0 +1,32 @@
+<launch>
+<!-- LIO_odom -->
+    <param name="robot_description" textfile="$(find test_launch)/urdf/igk.xacro" />
+    <!-- <param name="/use_sim_time" value="true" /> -->
+    <node name="cartographer_node" pkg="cartographer_ros"
+		type="cartographer_node" args="
+			-configuration_directory $(find test_launch)/lua
+			-configuration_basename LIO_odom.lua"
+		output="screen">
+		<remap from="/points2" to="/wanji_point" />
+	</node>
+
+	<node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" 
+		type="cartographer_occupancy_grid_node" args="
+			-resolution 0.05
+			--noinclude_unfrozen_submaps" 
+		output="screen">
+	</node>
+    <node name="robot_state_pblisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
+<!-- car_driver -->
+	<include file="$(find test_launch)/launch/bundle_launch/driver_canbus_fixposition.launch">
+	</include>
+
+	<node pkg="ecef2utm" name="LIO_odom_pub" type="LIO_odom_pub.py" >
+	</node>
+	<node pkg="ecef2utm" name="GNSS_pub" type="GNSS_pub.py" output="screen"/>
+	<node pkg="ecef2utm" name="RTK_fusion_SLAM_Ros" type="RTK_fusion_SLAM_Ros.py" output="screen" />
+<!-- lanelet2_map -->
+	<!-- <include file="$(find test_launch)/launch/bundle_launch/lanelet2_map_wanji.launch"/> -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find test_launch)/rviz/RTK_fusion_SLAM_rviz.rviz" />
+</launch>
+
